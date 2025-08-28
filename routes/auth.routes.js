@@ -1,26 +1,15 @@
 import { Router } from "express";
+import { signIn, signOut, signUp } from "../controllers/auth.controller.js";
 
 const authRouter = Router();
 
-authRouter.post("/sign-up", (req, res) => {
-  // Handle sign-up logic
-  res.send({
-    message: "User signed up",
-  });
-});
+//POST: /api/v1/auth/sign-up
+authRouter.post("/sign-up", signUp);
 
-authRouter.post("/sign-in", (req, res) => {
-  // Handle sign-in logic
-  res.send({
-    message: "User signed in",
-  });
-});
+//POST: /api/v1/auth/sign-in
+authRouter.post("/sign-in", signIn);
 
-authRouter.post("/sign-out", (req, res) => {
-  // Handle sign-out logic
-  res.send({
-    message: "User signed out",
-  });
-});
+//POST: /api/v1/auth/sign-out
+authRouter.post("/sign-out", signOut);
 
 export default authRouter;
