@@ -1,4 +1,10 @@
 import { Router } from "express";
+import {
+  createSubscription,
+  getUserSubscriptions,
+} from "../controllers/subscription.controller.js";
+
+import authorize from "../middlewares/auth.middleware.js";
 
 const subscriptionRouter = Router();
 
@@ -14,11 +20,7 @@ subscriptionRouter.get("/:id", (req, res) => {
   });
 });
 
-subscriptionRouter.post("/", (req, res) => {
-  res.send({
-    message: "POST create subscription",
-  });
-});
+subscriptionRouter.post("/", authorize, createSubscription);
 
 subscriptionRouter.put("/:id", (req, res) => {
   res.send({
@@ -32,11 +34,7 @@ subscriptionRouter.delete("/:id", (req, res) => {
   });
 });
 
-subscriptionRouter.get("/user/:id", (req, res) => {
-  res.send({
-    message: "GET subscriptions for user " + req.params.id,
-  });
-});
+subscriptionRouter.get("/user/:id", authorize, getUserSubscriptions);
 
 subscriptionRouter.put("/:id/cancel", (req, res) => {
   res.send({
